@@ -1,0 +1,67 @@
+<MyBoxLayout>
+
+    BoxLayout:
+        cols: 3
+        size: root.width, root.height
+
+        GridLayout:
+            cols: 1
+            spacing: .5
+
+
+            Spinner:
+                id: selection_id
+                text: "Problem Type Selection"
+                values: ["Present Value, P, from F", "Future Value, F, from P", "Number of Periods", "Find Compound Interest"]
+                on_text: root.spinner_click(selection_id.text)
+                size_hint_y: 0.1
+
+            TextInput:
+                id: mutable1
+                hint_text: "Select a problem type to get started"
+                size_hint_y: 0.1
+                background_color: [0.9, 0.9, 0.9, 1]
+
+            TextInput:
+                id: mutable2
+                hint_text: ""
+                size_hint_y: 0.1
+                background_color: [0.9, 0.9, 0.9, 1]
+
+            TextInput:
+                id: mutable3
+                hint_text: ""
+                size_hint_y: 0.1
+                background_color: [0.9, 0.9, 0.9, 1]
+
+            TextInput:
+                id: mutable4
+                hint_text: ""
+                size_hint_y: 0
+                background_color: [0.9, 0.9, 0.9, 1]
+
+
+            Button:
+                id: goButton
+                text: "Go!"
+                background_color: 0, 1, 0, 1
+                on_press: root.press()
+
+        GridLayout:
+            cols: 1
+            Image:
+                source: 'logo.png'
+            Label:
+                id: center_label
+                text: "Welcome to the Economics Engine!"
+            Label:
+                id: selection_disp
+                text: "Please select your problem category \non the left to continue. "
+
+       
+        GridLayout:
+            cols: 1
+            Label:
+                text: "Glossary"
+            Label:
+                text: "pending"

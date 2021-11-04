@@ -1,0 +1,21 @@
+{
+    "terms":[
+
+    {
+        "type": "P",
+        "def" : "Present Value",
+        "description": "The sum of money which if invested now at a given rate of compound interest will accumulate exactly to a specified amount at a specified future date."
+    }
+
+],
+
+
+    "problemTypes":[
+
+    {
+        "type": "Present Value, P",
+        "description": "Indicates what the total value of a series of future payments is worth now, while taking into account static but compound interest rates.",
+        "units" : "i: Enter in terms of percentage. n: /'nper/', indicates the number of time periods that pass between now and the time of the future value. Time periods entered must be consistent with the units of time used in the interest rate. A: /'Regular periodic amount /'. Whatever sum of money is being added/subtracted regularly, enter this value. "
+    }
+
+]}
