@@ -9,7 +9,8 @@ from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
 import econEngine
-import json
+import sys
+import traceback
 import glosseryProcessor
 
 #helper constants
@@ -33,7 +34,7 @@ class MyBoxLayout(Widget):
 
 
         #handles writing glossary data to GUI
-        termsList, problemTypesList = glosseryProcessor.main()
+        termsList, termDefs, problemTypesList, typeDefs = glosseryProcessor.main()
         self.ids.terms_id.values = termsList
         self.ids.problemTypes_id.values = problemTypesList
 
@@ -91,8 +92,11 @@ class MyBoxLayout(Widget):
 
         #TODO - figure out how to do present worth analysis
         #TODO - annual worth analysis
+        
         except:
             self.ids.selection_disp.text = "Please check your input."
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            traceback.print_exception(exc_type, exc_value, exc_traceback)
 
     #selection made here - logic for contextual changes here also
     def spinner_click(self, value):
