@@ -8,8 +8,9 @@ from kivy.app import App
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
-import json
 import econEngine
+import json
+import glosseryProcessor
 
 #helper constants
 i = "Interest rate (%)"
@@ -25,10 +26,17 @@ Builder.load_file('engine.kv')
 #within python logic
 class MyBoxLayout(Widget):
 
-    #initialize infinite keywords
+    #initialize infinite keywords & write glossary data
     def __init__(self, **kwargs):
         # call grid layout constructor
         super(MyBoxLayout, self).__init__(**kwargs)
+
+
+        #handles writing glossary data to GUI
+        termsList, problemTypesList = glosseryProcessor.main()
+        self.ids.terms_id.values = termsList
+        self.ids.problemTypes_id.values = problemTypesList
+
 
 
     #passes data from GUI to econEngine class functions
@@ -36,51 +44,55 @@ class MyBoxLayout(Widget):
         print("button pressed")
         problemType = self.ids.selection_id.text
 
-        #present value P from F
-        if(problemType=="Present Value, P, from F"):
+        try:
+            #present value P from F
+            if(problemType=="Present Value, P, from F"):
+                    iVal = float(self.ids.mutable1.text)
+                    nVal = float(self.ids.mutable2.text)
+                    fVal = float(self.ids.mutable3.text)
+
+                    answer = econEngine.presentValuePfromF(iVal, nVal, fVal)
+                    answer = str(format(answer, '.2f'))
+                    answer = f'The answer is: {answer}'
+
+                    self.ids.selection_disp.text = answer
+
+            #future value F from P
+            if(problemType=="Future Value, F, from P"):
                 iVal = float(self.ids.mutable1.text)
                 nVal = float(self.ids.mutable2.text)
-                fVal = float(self.ids.mutable3.text)
+                aVal = float(self.ids.mutable3.text)
 
-                answer = econEngine.presentValuePfromF(iVal, nVal, fVal)
+                answer = econEngine.futureValueFfromP(iVal, nVal, aVal)
+                answer = str(format(answer, '.2f'))
+                answer = f'The answer is: {answer}'
+
+                self.ids.selection_disp.text = answer
+                
+            #number of periods based on i, A, P & F values (N/(A,P,F))
+            if(problemType=="Number of Periods"):
+                iVal = float(self.ids.mutable1.text)
+                aVal = float(self.ids.mutable2.text)
+                pVal = float(self.ids.mutable3.text)
+                fVal = float(self.ids.mutable4.text)
+
+                answer = econEngine.numPeriods(iVal, aVal, pVal, fVal)
                 answer = str(format(answer, '.2f'))
                 answer = f'The answer is: {answer}'
 
                 self.ids.selection_disp.text = answer
 
-        #future value F from P
-        if(problemType=="Future Value, F, from P"):
-            iVal = float(self.ids.mutable1.text)
-            nVal = float(self.ids.mutable2.text)
-            aVal = float(self.ids.mutable3.text)
 
-            answer = econEngine.futureValueFfromP(iVal, nVal, aVal)
-            answer = str(format(answer, '.2f'))
-            answer = f'The answer is: {answer}'
+            #TODO - compound interest
+            if(problemType=="Find Compound Interest"):
+                pass
 
-            self.ids.selection_disp.text = answer
-            
-        #number of periods based on i, A, P & F values (N/(A,P,F))
-        if(problemType=="Number of Periods"):
-            iVal = float(self.ids.mutable1.text)
-            aVal = float(self.ids.mutable2.text)
-            pVal = float(self.ids.mutable3.text)
-            fVal = float(self.ids.mutable4.text)
+            #TODO - APY vs APR
 
-            answer = econEngine.numPeriods(iVal, aVal, pVal, fVal)
-            answer = str(format(answer, '.2f'))
-            answer = f'The answer is: {answer}'
-
-            self.ids.selection_disp.text = answer
-
-
-        #TODO - compound interest
-        if(problemType=="Find Compound Interest"):
-            pass
-
-        #TODO - APY vs APR
-
-    #TODO - figure out how to do present worth analysis
+        #TODO - figure out how to do present worth analysis
+        #TODO - annual worth analysis
+        except:
+            self.ids.selection_disp.text = "Please check your input."
 
     #selection made here - logic for contextual changes here also
     def spinner_click(self, value):
@@ -124,7 +136,6 @@ class MyBoxLayout(Widget):
 
 #TODO - iterate through glossary to display definitions
 #       of whatever kinda value on right hand side
-
 
 class MyApp(App):
     def build(self):
