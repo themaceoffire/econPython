@@ -12,6 +12,7 @@ import econEngine
 import sys
 import traceback
 import glosseryProcessor
+from kivy.uix.screenmanager import ScreenManager, Screen
 
 #helper constants
 i = "Interest rate (%)"
@@ -20,23 +21,28 @@ A = "Reoccuring regular amount (A)"
 P = "Present value (P)"
 F = "Future Value (F)"
 
-#loading specific kivy file :)
-Builder.load_file('engine.kv')
+#defining screens & window manager
+class LandingScreen(Screen):
+    pass
 
-#ultimately handles comms between the GUI and data elements
+
+#ultimately handles comms between the mainscreen GUI and data elements
 #within python logic
-class MyBoxLayout(Widget):
-
+class MainScreen(Screen):
+    
     #initialize infinite keywords & write glossary data
     def __init__(self, **kwargs):
         # call grid layout constructor
-        super(MyBoxLayout, self).__init__(**kwargs)
+        super(MainScreen, self).__init__(**kwargs)
 
 
         #handles writing glossary data to GUI
         termsList, termDefs, problemTypesList, typeDefs = glosseryProcessor.main()
-        self.ids.terms_id.values = termsList
-        self.ids.problemTypes_id.values = problemTypesList
+        
+        app = App.get_running_app()
+        main_screen = app.root.get_screen('MainScreen')        
+        main_screen.ids.terms_id.values = termsList
+    #    self.ids.problemTypes_id.values = problemTypesList
 
 
 
@@ -141,9 +147,33 @@ class MyBoxLayout(Widget):
 #TODO - iterate through glossary to display definitions
 #       of whatever kinda value on right hand side
 
+
+## TODO - maybe replace most of main screen w widget
+    # so all my damn functions are busted anymore??
+
+    pass
+
+class TableScreen(Screen):
+    pass
+
+class WindowManager(ScreenManager):
+    pass
+
+
+
+
+
+
+#TODO - iterate through glossary to display definitions
+#       of whatever kinda value on right hand side
+
+
+#loading specific kivy file :)
+kv = Builder.load_file('engine.kv')
+
 class MyApp(App):
     def build(self):
-        return MyBoxLayout()
+        return kv
 
 if __name__ == '__main__':
     MyApp().run()

@@ -1,8 +1,39 @@
-<MyBoxLayout>
+WindowManager:
+
+    LandingScreen:
+    MainScreen:
+    TableScreen:
+
+<LandingScreen>:
+    name: "landing"
+
+    BoxLayout:
+        cols: 3
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Label:
+            text: "Landing screen :)"
+        
+        Button:
+            text: "Main Screen"
+            on_release: 
+                app.root.current = "main"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "Table screen"
+            on_release: 
+                app.root.current = "table"
+                root.manager.transition.direction = "right"
+
+<MainScreen>:
+    name: "main"
 
     BoxLayout:
         cols: 3
         size: root.width, root.height
+
 
         GridLayout:
             cols: 1
@@ -74,5 +105,27 @@
             Label:
                 text: "Glossary"
 
+            Button:
+                text: "Back to landing"
+                size_hint_y: 0.1
+                on_release: 
+                    app.root.current = "landing"
+                    root.manager.transition.direction = "right"
 
 
+
+<TableScreen>:
+    name: "table"
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Label:
+            text: "table screen :)"
+
+        Button:
+            text: "Back to landing"
+            on_release: 
+                app.root.current = "landing"
+                root.manager.transition.direction = "left"
