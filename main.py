@@ -39,9 +39,6 @@ class MainScreen(Screen):
         #handles writing glossary data to GUI
         termsList, termDefs, problemTypesList, typeDefs = glosseryProcessor.main()
         
-        app = App.get_running_app()
-        main_screen = app.root.get_screen('MainScreen')        
-        main_screen.ids.terms_id.values = termsList
     #    self.ids.problemTypes_id.values = problemTypesList
 
 
@@ -60,6 +57,7 @@ class MainScreen(Screen):
 
                     answer = econEngine.presentValuePfromF(iVal, nVal, fVal)
                     answer = str(format(answer, '.2f'))
+                    answer = "${:}".format(answer)
                     answer = f'The answer is: {answer}'
 
                     self.ids.selection_disp.text = answer
@@ -72,6 +70,7 @@ class MainScreen(Screen):
 
                 answer = econEngine.futureValueFfromP(iVal, nVal, aVal)
                 answer = str(format(answer, '.2f'))
+                answer = "${:}".format(answer)
                 answer = f'The answer is: {answer}'
 
                 self.ids.selection_disp.text = answer
@@ -85,6 +84,7 @@ class MainScreen(Screen):
 
                 answer = econEngine.numPeriods(iVal, aVal, pVal, fVal)
                 answer = str(format(answer, '.2f'))
+                answer = "${:}".format(answer)
                 answer = f'The answer is: {answer}'
 
                 self.ids.selection_disp.text = answer
@@ -92,7 +92,17 @@ class MainScreen(Screen):
 
             #TODO - compound interest
             if(problemType=="Find Compound Interest"):
-                pass
+                nVal = float(self.ids.mutable1.text)
+                aVal = float(self.ids.mutable2.text)
+                pVal = float(self.ids.mutable3.text)
+
+                answer = econEngine.compoundInterest(nVal, aVal, pVal)
+                answer = str(format(answer, '.2f'))
+                answer = "{:}%".format(answer)
+                answer = f'The answer is: {answer}'
+
+                self.ids.selection_disp.text = answer
+
 
             #TODO - APY vs APR
 
@@ -144,12 +154,8 @@ class MainScreen(Screen):
         if(problemType != "Number of Periods" and self.ids.mutable4.size_hint_y == 0.1):
             self.ids.mutable4.size_hint_y = 0
 
-#TODO - iterate through glossary to display definitions
+#TODO - see if possible: iterate through glossary to display definitions
 #       of whatever kinda value on right hand side
-
-
-## TODO - maybe replace most of main screen w widget
-    # so all my damn functions are busted anymore??
 
     pass
 
@@ -158,14 +164,6 @@ class TableScreen(Screen):
 
 class WindowManager(ScreenManager):
     pass
-
-
-
-
-
-
-#TODO - iterate through glossary to display definitions
-#       of whatever kinda value on right hand side
 
 
 #loading specific kivy file :)

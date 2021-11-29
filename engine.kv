@@ -7,25 +7,67 @@ WindowManager:
 <LandingScreen>:
     name: "landing"
 
+    canvas.before:
+        Color: 
+            rgba: (1, 1, 1, 1)
+
+        Rectangle:
+            source: 'background.png'
+            size: root.width, root.height
+            pos: self.pos
+
     BoxLayout:
         cols: 3
-        orientation: "vertical"
+        orientation: "horizontal"
         size: root.width, root.height
 
-        Label:
-            text: "Landing screen :)"
-        
-        Button:
-            text: "Main Screen"
-            on_release: 
-                app.root.current = "main"
-                root.manager.transition.direction = "left"
+        GridLayout:
+            cols: 1
+            Button:
+                text: "Table screen"
+                on_release: 
+                    app.root.current = "table"
+                    root.manager.transition.direction = "right"
+        GridLayout:
+            cols: 1
+            Image:
+                source: 'logo.png'
+                allow_stretch: True
+            Label:
+                text: "Welcome to the Economics Engine!"
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+            
+            Label:
+                text: "On the left, you can access more complicated problems, such as Present Worth Analysis."
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
 
-        Button:
-            text: "Table screen"
-            on_release: 
-                app.root.current = "table"
-                root.manager.transition.direction = "right"
+            Label:
+                text: "Fall 2021 Engineering Economics Honors Contract"
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+
+            Label:
+                text: "Author: M. Hurst"
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+
+        GridLayout:
+            cols: 1
+            Button:
+                text: "Main Screen"
+                on_release: 
+                    app.root.current = "main"
+                    root.manager.transition.direction = "left"
+
+        
+
+
 
 <MainScreen>:
     name: "main"
@@ -78,6 +120,13 @@ WindowManager:
                 background_color: 0, 1, 0, 1
                 on_press: root.press()
 
+            Button:
+                text: "Back to landing"
+                size_hint_y: 0.1
+                on_release: 
+                    app.root.current = "landing"
+                    root.manager.transition.direction = "right"
+
         GridLayout:
             cols: 1
             Image:
@@ -105,27 +154,52 @@ WindowManager:
             Label:
                 text: "Glossary"
 
-            Button:
-                text: "Back to landing"
-                size_hint_y: 0.1
-                on_release: 
-                    app.root.current = "landing"
-                    root.manager.transition.direction = "right"
-
 
 
 <TableScreen>:
     name: "table"
 
+    canvas.before:
+        Color: 
+            rgba: (1, 1, 1, 1)
+
+        Rectangle:
+            source: 'background.png'
+            size: root.width, root.height
+            pos: self.pos
+
     BoxLayout:
-        orientation: "vertical"
+        cols: 2
+        orientation: "horizontal"
         size: root.width, root.height
 
-        Label:
-            text: "table screen :)"
+        GridLayout:
+            cols: 1
 
-        Button:
-            text: "Back to landing"
-            on_release: 
-                app.root.current = "landing"
-                root.manager.transition.direction = "left"
+        GridLayout:
+            cols: 1
+            width: 250
+            size_hint_x: None
+            
+            Label:
+                text: "table screen :)"
+                size_hint_y: 0.1
+
+            Spinner:
+                id: table_selection_id
+                text: "Problem Type Selection"
+                values: ["Present Worth Analysis", "Future Worth Analysis", "Annual Worth Analysis"]
+                size_hint_y: 0.2
+
+            Label:
+                text: ""
+                size_hint_y: 0.3
+
+            Button:
+                text: "Back to landing"
+                size_hint_y: 0.1
+                on_release: 
+                    app.root.current = "landing"
+                    root.manager.transition.direction = "left"
+
+
