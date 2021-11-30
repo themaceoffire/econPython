@@ -160,6 +160,34 @@ class MainScreen(Screen):
     pass
 
 class TableScreen(Screen):
+    
+    #initialize infinite keywords & write glossary data
+    def __init__(self, **kwargs):
+        # call grid layout constructor
+        super(TableScreen, self).__init__(**kwargs)
+
+    def table_spinner_click(self, value):
+        #table_selection_disp
+        self.ids.table_selection_disp.text = f"You selected {value}"
+
+        tableType = value
+
+        #present worth analysis
+
+        if(tableType=="Present Worth Analysis"):
+            print("Present worth!!")
+
+        if(tableType=="Future Worth Analysis"):
+            print("future worth!!")
+        
+        if(tableType=="Annual Worth Analysis"):
+            print("Annual worth!!")
+
+        #future worth analysis
+
+        #annual worth analysis
+
+
     pass
 
 class WindowManager(ScreenManager):

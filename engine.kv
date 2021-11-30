@@ -190,8 +190,10 @@ WindowManager:
                 text: "Problem Type Selection"
                 values: ["Present Worth Analysis", "Future Worth Analysis", "Annual Worth Analysis"]
                 size_hint_y: 0.2
+                on_text: root.table_spinner_click(table_selection_id.text)
 
             Label:
+                id: table_selection_disp
                 text: ""
                 size_hint_y: 0.3
 
