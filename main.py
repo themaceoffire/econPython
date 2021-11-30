@@ -168,7 +168,7 @@ class TableScreen(Screen):
 
     def table_spinner_click(self, value):
         #table_selection_disp
-        self.ids.table_selection_disp.text = f"You selected {value}"
+        self.ids.table_selection_disp.text = f"{value}"
 
         tableType = value
 

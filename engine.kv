@@ -174,7 +174,152 @@ WindowManager:
         size: root.width, root.height
 
         GridLayout:
-            cols: 1
+            id: main_table
+            cols: 3
+
+            Label:
+                
+                text: "You have selected:"
+
+            Label:
+                text: ""
+                id: table_selection_disp 
+
+            Label:
+                text: ""
+
+
+
+            Label:
+                text: "Year Index"
+            
+            Label:
+                text: "Numerical Value"
+
+            Label:
+                text: "Input Type"
+
+
+
+            Label:
+                text: "0"
+
+            TextInput:
+                id: A1
+
+            Spinner:
+                id: A1type
+                text: "..."
+                values: ["F", "P", "A"]
+
+            Label:
+                text: "1"
+            TextInput:
+                id: A2
+            Spinner:
+                id: A2type
+                text: "..."
+                values: ["F", "P", "A"]
+
+
+            Label:
+                text: "2"
+            TextInput:
+                id: A3
+            Spinner:
+                id: A3type
+                text: "..."
+                values: ["F", "P", "A"]
+
+            Label:
+                text: "3"
+            TextInput:
+                id: A3
+            Spinner:
+                id: A3type
+                text: "..."
+                values: ["F", "P", "A"]
+
+            Label:
+                text: "4"
+            TextInput:
+                id: A4
+            Spinner:
+                id: A4type
+                text: "..."
+                values: ["F", "P", "A"]
+
+            Label:
+                text: "5"
+            TextInput:
+                id: A5
+            Spinner:
+                id: A5type
+                text: "..."
+                values: ["F", "P", "A"]
+
+            Label:
+                text: "6"
+            TextInput:
+                id: A6
+            Spinner:
+                id: A6type
+                text: "..."
+                values: ["F", "P", "A"]
+
+            Label:
+                text: "7"
+            TextInput:
+                id: A7
+            Spinner:
+                id: A7type
+                text: "..."
+                values: ["F", "P", "A"]
+
+            Label:
+                text: "8"
+            TextInput:
+                id: A8
+            Spinner:
+                id: A8type
+                text: "..."
+                values: ["F", "P", "A"]
+
+            Label:
+                text: "9"
+            TextInput:
+                id: A9
+            Spinner:
+                id: A9type
+                text: "..."
+                values: ["F", "P", "A"]
+
+            Label:
+                text: "10"
+            TextInput:
+                id: A10
+            Spinner:
+                id: A10type
+                text: "..."
+                values: ["F", "P", "A"]
+
+            Label:
+                text: ""
+            Label:
+                text: ""
+            
+            GridLayout:
+                cols: 2
+
+                Button:
+                    id: table_reset
+                    text: "Reset"
+
+                Button:
+                    id: table_submit
+                    text: "Go!"
+                    background_color: 0, 1, 0, 1
+
 
         GridLayout:
             cols: 1
@@ -193,9 +338,11 @@ WindowManager:
                 on_text: root.table_spinner_click(table_selection_id.text)
 
             Label:
-                id: table_selection_disp
-                text: ""
+                text: "User guide: Please make an analysis type selection above. This table supports up to 10 data entries. Use postive values for cash inflows, and negative values for cash outflows."
                 size_hint_y: 0.3
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
 
             Button:
                 text: "Back to landing"
