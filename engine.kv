@@ -205,19 +205,20 @@ WindowManager:
                 text: "0"
 
             TextInput:
-                id: A1
+                id: A0
 
             Spinner:
-                id: A1type
+                id: A0type
                 text: "..."
                 values: ["F", "P", "A"]
+
 
             Label:
                 text: "1"
             TextInput:
-                id: A2
+                id: A1
             Spinner:
-                id: A2type
+                id: A1type
                 text: "..."
                 values: ["F", "P", "A"]
 
@@ -225,9 +226,9 @@ WindowManager:
             Label:
                 text: "2"
             TextInput:
-                id: A3
+                id: A2
             Spinner:
-                id: A3type
+                id: A2type
                 text: "..."
                 values: ["F", "P", "A"]
 
@@ -305,8 +306,9 @@ WindowManager:
 
             Label:
                 text: ""
-            Label:
-                text: ""
+            TextInput:
+                id: iRate
+                hint_text: "rate in %"
             
             GridLayout:
                 cols: 2
@@ -314,11 +316,13 @@ WindowManager:
                 Button:
                     id: table_reset
                     text: "Reset"
+                    on_release: root.reset()
 
                 Button:
                     id: table_submit
                     text: "Go!"
                     background_color: 0, 1, 0, 1
+                    on_release: root.tableGo()
 
 
         GridLayout:
@@ -327,7 +331,7 @@ WindowManager:
             size_hint_x: None
             
             Label:
-                text: "table screen :)"
+                text: "Table Screen"
                 size_hint_y: 0.1
 
             Spinner:
@@ -338,8 +342,15 @@ WindowManager:
                 on_text: root.table_spinner_click(table_selection_id.text)
 
             Label:
-                text: "User guide: Please make an analysis type selection above. This table supports up to 10 data entries. Use postive values for cash inflows, and negative values for cash outflows."
+                text: "User guide: Please make an analysis type selection above. This table supports up to 11 data entries. Use postive values for cash inflows, and negative values for cash outflows."
                 size_hint_y: 0.3
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+
+            Label:
+                text: ""
+                id: answer_spot
                 text_size: self.size
                 halign: 'center'
                 valign: 'middle'

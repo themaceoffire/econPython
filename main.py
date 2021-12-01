@@ -170,22 +170,52 @@ class TableScreen(Screen):
         #table_selection_disp
         self.ids.table_selection_disp.text = f"{value}"
 
-        tableType = value
+    def reset(self):
+        print("reset called")
+        self.ids.A0.text = ""
+        self.ids.A0type.text = "..."
+        self.ids.A1.text = ""
+        self.ids.A1type.text = "..."
+        self.ids.A2.text = ""
+        self.ids.A2type.text = "..."
+        self.ids.A3.text = ""
+        self.ids.A3type.text = "..."
+        self.ids.A4.text = ""
+        self.ids.A4type.text = "..."
+        self.ids.A5.text = ""
+        self.ids.A5type.text = "..."
+        self.ids.A6.text = ""
+        self.ids.A6type.text = "..."
+        self.ids.A7.text = ""
+        self.ids.A7type.text = "..."
+        self.ids.A8.text = ""
+        self.ids.A8type.text = "..."
+        self.ids.A9.text = ""
+        self.ids.A9type.text = "..."
+        self.ids.A10.text = ""
+        self.ids.A10type.text = "..."
+        self.ids.iRate.text = ""
 
-        #present worth analysis
+    def tableGo(self):
+        print("table go!")
+        try:
+            tableType = self.ids.table_selection_id.text
+        except:
+            self.ids.answer_spot.text = "Please make a problem type selection."
+            return
 
-        if(tableType=="Present Worth Analysis"):
-            print("Present worth!!")
+        if tableType == "Present Worth Analysis":
+            tableInput = []
 
-        if(tableType=="Future Worth Analysis"):
-            print("future worth!!")
-        
-        if(tableType=="Annual Worth Analysis"):
-            print("Annual worth!!")
+            econEngine.presentWorthAnalysis(tableInput)
 
-        #future worth analysis
+        if tableType == "Future Worth Analysis":
 
-        #annual worth analysis
+            econEngine.futureWorthAnalysis(tableInput)
+
+        if tableType == "Annual Worth Analysis":
+
+            econEngine.annaualWorthAnalysis(tableInput)
 
 
     pass

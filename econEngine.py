@@ -36,6 +36,23 @@ def compoundInterest(n, A, P):
     return(npf.rate(n, A, P, 0)*100)
 
 
+#---------------- Extended Analysis Functions--------------$
+
+#TODO - dynamically handle different numbers of input for all following
+
+#TODO - present worth analysis
+def presentWorthAnalysis(input):
+    print(" present worth function activated ")
+
+#TODO - future worth analysis
+def futureWorthAnalysis(input):
+    print(" Future worth analysis activated ")
+
+#TODO - annual worth analysis
+def annaualWorthAnalysis(input):
+    print("present worth analysis activated")
+
+
 
 
 
