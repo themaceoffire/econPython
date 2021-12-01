@@ -44,13 +44,22 @@ def compoundInterest(n, A, P):
 def presentWorthAnalysis(input, iRate):
     print(" present worth function activated ")
 
+    for field in input:
+        print(field)
+
 #TODO - future worth analysis
 def futureWorthAnalysis(input, iRate):
     print(" Future worth analysis activated ")
 
+    for field in input:
+        print(field)
+
 #TODO - annual worth analysis
 def annaualWorthAnalysis(input, iRate):
     print("present worth analysis activated")
+
+    for field in input:
+        print(field)
 
 
 
