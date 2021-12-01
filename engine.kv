@@ -72,6 +72,15 @@ WindowManager:
 <MainScreen>:
     name: "main"
 
+    canvas.before:
+        Color: 
+            rgba: (1, 1, 1, 1)
+
+        Rectangle:
+            source: 'background.png'
+            size: root.width, root.height
+            pos: self.pos
+
     BoxLayout:
         cols: 3
         size: root.width, root.height
@@ -81,30 +90,33 @@ WindowManager:
             cols: 1
             spacing: .5
 
+            Label:
+                text: ""
+                size_hint_y: 0.2
 
             Spinner:
                 id: selection_id
                 text: "Problem Type Selection"
                 values: ["Present Value, P, from F", "Future Value, F, from P", "Payment Value, A, from P", "Present Value, P, from A", "Payment Value, A, from F", "Future Value, F, from A" ,"Number of Periods", "Find Compound Interest"]
                 on_text: root.spinner_click(selection_id.text)
-                size_hint_y: 0.1
+                size_hint_y: 0.3
 
             TextInput:
                 id: mutable1
                 hint_text: "Select a problem type to get started"
-                size_hint_y: 0.1
+                size_hint_y: 0.3
                 background_color: [0.9, 0.9, 0.9, 1]
 
             TextInput:
                 id: mutable2
                 hint_text: ""
-                size_hint_y: 0.1
+                size_hint_y: 0.3
                 background_color: [0.9, 0.9, 0.9, 1]
 
             TextInput:
                 id: mutable3
                 hint_text: ""
-                size_hint_y: 0.1
+                size_hint_y: 0.3
                 background_color: [0.9, 0.9, 0.9, 1]
 
             TextInput:
@@ -113,16 +125,31 @@ WindowManager:
                 size_hint_y: 0
                 background_color: [0.9, 0.9, 0.9, 1]
 
+            Label:
+                text: ""
 
-            Button:
-                id: goButton
-                text: "Go!"
-                background_color: 0, 1, 0, 1
-                on_press: root.press()
+
+            GridLayout:
+                cols: 2
+
+                Button:
+                    id: main_reset
+                    text: "Reset"
+                    on_press: root.main_reset()
+
+                Button:
+                    id: goButton
+                    text: "Go!"
+                    background_color: 0, 1, 0, 1
+                    on_press: root.press()
+
+            Label:
+                text: ""
+                size_hint_y: 0.2
 
             Button:
                 text: "Back to landing"
-                size_hint_y: 0.1
+                size_hint_y: 0.3
                 on_release: 
                     app.root.current = "landing"
                     root.manager.transition.direction = "right"
@@ -177,148 +204,57 @@ WindowManager:
 
 
             Label:
-                text: "Year Index"
+                text: "Value Type"
             
             Label:
                 text: "Numerical Value"
 
             Label:
-                text: "Input Type"
-
-
+                text: "Life-Cycle Length"
 
             Label:
-                text: "0"
-
-            TextInput:
-                id: A0
-
-            Spinner:
-                id: A0type
-                text: "..."
-                values: ["F", "P"]
-
-
-            Label:
-                text: "1"
-            TextInput:
-                id: A1
-            Spinner:
-                id: A1type
-                text: "..."
-                values: ["F", "P"]
-
-
-            Label:
-                text: "2"
-            TextInput:
-                id: A2
-            Spinner:
-                id: A2type
-                text: "..."
-                values: ["F", "P"]
-
-            Label:
-                text: "3"
-            TextInput:
-                id: A3
-            Spinner:
-                id: A3type
-                text: "..."
-                values: ["F", "P"]
-
-            Label:
-                text: "4"
-            TextInput:
-                id: A4
-            Spinner:
-                id: A4type
-                text: "..."
-                values: ["F", "P"]
-
-            Label:
-                text: "5"
-            TextInput:
-                id: A5
-            Spinner:
-                id: A5type
-                text: "..."
-                values: ["F", "P"]
-
-            Label:
-                text: "6"
-            TextInput:
-                id: A6
-            Spinner:
-                id: A6type
-                text: "..."
-                values: ["F", "P"]
-
-            Label:
-                text: "7"
-            TextInput:
-                id: A7
-            Spinner:
-                id: A7type
-                text: "..."
-                values: ["F", "P"]
-
-            Label:
-                text: "8"
-            TextInput:
-                id: A8
-            Spinner:
-                id: A8type
-                text: "..."
-                values: ["F", "P"]
-
-            Label:
-                text: "9"
-            TextInput:
-                id: A9
-            Spinner:
-                id: A9type
-                text: "..."
-                values: ["F", "P"]
-
-            Label:
-                text: "10"
-            TextInput:
-                id: A10
-            Spinner:
-                id: A10type
-                text: "..."
-                values: ["F", "P"]
-
-            Label:
-                text: "Annual Expense 1"
-            TextInput:
-                id: ae1
-            Label:
+                id: mutableType1
                 text: ""
-            
-            
-            Label:
-                text: "Annual Expense 2"
             TextInput:
-                id: ae2
+                id: mutableInput1
             Label:
                 text: ""
 
-
             Label:
-                text: "Annual Expense 3"
+                id: mutableType2
             TextInput:
-                id: ae3
+                id: mutableInput2
             Label:
                 text: ""
 
+            Label:
+                id: mutableType3
+            TextInput:
+                id: mutableInput3
+            TextInput:
+                id: input3year
+                hint_text: "n"
 
             Label:
                 text: ""
             TextInput:
                 id: iRate
                 hint_text: "rate in %"
+
+
+            Label:
+                text: ""
+            Label:
+                text: ""
+            Label:
+                text: ""
+
+            Label: 
+                text: ""
+            Label:
+                text: ""
+            Label:
+                text: ""
             
             GridLayout:
                 cols: 2
@@ -341,7 +277,7 @@ WindowManager:
             size_hint_x: None
             
             Label:
-                text: "Table Screen"
+                text: "Analysis Screen"
                 size_hint_y: 0.1
 
             Spinner:
@@ -352,7 +288,7 @@ WindowManager:
                 on_text: root.table_spinner_click(table_selection_id.text)
 
             Label:
-                text: "User guide: Please make an analysis type selection above. This table supports up to 11 data entries. Use postive values for cash inflows, and negative values for cash outflows. The last entry made in the table is assumed to be the final year of the project life cycle."
+                text: "User guide: Please make an analysis type selection above. Use postive values for cash inflows, and negative values for cash outflows."
                 size_hint_y: 0.5
                 text_size: self.size
                 halign: 'center'

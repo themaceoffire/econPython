@@ -69,30 +69,27 @@ def compoundInterest(n, A, P):
 #---------------- Single project Analysis Functions--------------$
 
 
-#TODO - present worth analysis
-def presentWorthAnalysis(input, iRate, annualExpenses):
-    i = i/100
+#present worth analysis
+def presentWorthAnalysis(P, A, F, n, i):
     print(" present worth function activated ")
-
-    lifeCycleLength = input[-1]['n']
-    toSum = []
+    PW = P + presentValuePfromA(i, n, -A) + presentValuePfromF(i, n, -F)
+    return(PW)
+    
     
 
-#TODO - future worth analysis
-def futureWorthAnalysis(input, iRate, annualExpenses):
+#future worth analysis
+def futureWorthAnalysis(P, A, n, i):
     print(" Future worth analysis activated ")
+    FW = futureValueFfromP(i, n, -P) + futureValueFfromA(i, n, -A)
+    return(FW)
 
-    for field in input:
-        print(field)
-
-#TODO - annual worth analysis
-def annaualWorthAnalysis(input, iRate, annualExpenses):
+#TODO - single cycle annual worth analysis
+def annualWorthAnalysis(P, F, A, n, i):
     print("annual worth analysis activated")
 
-    for field in input:
-        print(field)
+    AW = A + paymentValueAfromP(i, n, -P) + paymentValueAfromF(i, n, -F)
 
-
+    return(AW)
 
 
 
