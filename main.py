@@ -426,6 +426,7 @@ class TableScreen(Screen):
                 print(tableInput)
 
                 econEngine.annaualWorthAnalysis(tableInput, iRate)
+            
             else:
                 self.ids.answer_spot.text = "Please check that you made a problem type selection."
         except:
