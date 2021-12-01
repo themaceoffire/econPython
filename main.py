@@ -106,7 +106,7 @@ class MainScreen(Screen):
                 self.ids.selection_disp.text = answer
 
 
-            #TODO - compound interest
+            #- compound interest
             if(problemType=="Find Compound Interest"):
                 nVal = float(self.ids.mutable1.text)
                 aVal = float(self.ids.mutable2.text)
