@@ -41,15 +41,15 @@ def compoundInterest(n, A, P):
 #TODO - dynamically handle different numbers of input for all following
 
 #TODO - present worth analysis
-def presentWorthAnalysis(input):
+def presentWorthAnalysis(input, iRate):
     print(" present worth function activated ")
 
 #TODO - future worth analysis
-def futureWorthAnalysis(input):
+def futureWorthAnalysis(input, iRate):
     print(" Future worth analysis activated ")
 
 #TODO - annual worth analysis
-def annaualWorthAnalysis(input):
+def annaualWorthAnalysis(input, iRate):
     print("present worth analysis activated")
 
 

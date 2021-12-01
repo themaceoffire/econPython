@@ -21,6 +21,22 @@ A = "Reoccuring regular amount (A)"
 P = "Present value (P)"
 F = "Future Value (F)"
 
+#helper functions
+def checkEmpty(input):
+    if input:
+        if input == "...":
+            return False
+        if input == "F" or "P" or "A":
+            return True
+        
+        try:
+            float(input)
+        except:
+            return False
+    
+    else:
+        return False
+
 #defining screens & window manager
 class LandingScreen(Screen):
     pass
@@ -195,27 +211,227 @@ class TableScreen(Screen):
         self.ids.A10.text = ""
         self.ids.A10type.text = "..."
         self.ids.iRate.text = ""
+        self.ids.answer_spot.text = ""
 
     def tableGo(self):
-        print("table go!")
+
+        #saving the values in the table to easier to handle variables
+        # validating input & storing fields that have been filled
+        if checkEmpty(self.ids.A0.text) and checkEmpty(self.ids.A0type.text):
+            A0 = self.ids.A0.text
+            A0type = self.ids.A0type.text
+        else:
+            A0 = False
+            A0type = False
+
+        if checkEmpty(self.ids.A1.text) and checkEmpty(self.ids.A1type.text):
+            A1 = self.ids.A1.text
+            A1type = self.ids.A1type.text
+        else:
+            A1 = False
+            A1type = False
+
+        if checkEmpty(self.ids.A2.text) and checkEmpty(self.ids.A2type.text):
+            A2 = self.ids.A2.text
+            A2type = self.ids.A2type.text
+        else:
+            A2 = False
+            A2type = False
+
+        if checkEmpty(self.ids.A3.text) and checkEmpty(self.ids.A3type.text):
+            A3 = self.ids.A3.text
+            A3type = self.ids.A3type.text
+        else:
+            A3 = False
+            A3type = False
+
+        if checkEmpty(self.ids.A4.text) and checkEmpty(self.ids.A4type.text):
+            A4 = self.ids.A4.text
+            A4type = self.ids.A4type.text
+        else:
+            A4 = False
+            A4type = False
+        
+        if checkEmpty(self.ids.A5.text) and checkEmpty(self.ids.A5type.text):
+            A5 = self.ids.A5.text
+            A5type = self.ids.A5type.text
+        else:
+            A5 = False
+            A5type = False
+
+        if checkEmpty(self.ids.A6.text) and checkEmpty(self.ids.A6type.text):
+            A6 = self.ids.A6.text
+            A6type = self.ids.A6type.text
+        else:
+            A6 = False
+            A6type = False
+
+        if checkEmpty(self.ids.A7.text) and checkEmpty(self.ids.A7type.text):
+            A7 = self.ids.A7.text
+            A7type = self.ids.A7type.text
+        else:
+            A7 = False
+            A7type = False
+
+        if checkEmpty(self.ids.A8.text) and checkEmpty(self.ids.A8type.text):
+            A8 = self.ids.A8.text
+            A8type = self.ids.A8type.text
+        else:
+            A8 = False
+            A8type = False
+
+        if checkEmpty(self.ids.A9.text) and checkEmpty(self.ids.A9type.text):
+            A9 = self.ids.A9.text
+            A9type = self.ids.A9type.text
+        else:
+            A9 = False
+            A9type = False
+
+        if checkEmpty(self.ids.A10.text) and checkEmpty(self.ids.A10type.text):
+            A10 = self.ids.A10.text
+            A10type = self.ids.A10type.text
+        else:
+            A10 = False
+            A10type = False
+
+        iRate = self.ids.iRate.text
+
+
         try:
             tableType = self.ids.table_selection_id.text
+            iRate = float(self.ids.iRate.text)
         except:
-            self.ids.answer_spot.text = "Please make a problem type selection."
+            self.ids.answer_spot.text = "Please make a problem type selection and ensure to enter an interest rate."
             return
+        
+        try:
+            
+            # expected tableInput structure
+            # [{'n' : 0, 'value': 120000, 'type' : "F"}]
+            #access syntax
+            # a[0]['type']
 
-        if tableType == "Present Worth Analysis":
-            tableInput = []
+            if tableType == "Present Worth Analysis":
+                tableInput = []
+                if A0 and A0type:
+                    tableInput.append({'n' : 0, 'value' : float(A0), 'type' : A0type})
 
-            econEngine.presentWorthAnalysis(tableInput)
+                if A1 and A1type:
+                    tableInput.append({'n': 1, 'value' : float(A1), 'type' : A1type})
 
-        if tableType == "Future Worth Analysis":
+                if A2 and A2type:
+                    tableInput.append({'n' : 2, 'value' : float(A2), 'type' : A2type})
 
-            econEngine.futureWorthAnalysis(tableInput)
+                if A3 and A3type:
+                    tableInput.append({'n' : 3, 'value' : float(A3), 'type' : A3type})
 
-        if tableType == "Annual Worth Analysis":
+                if A4 and A4type:
+                    tableInput.append({'n' : 4, 'value' : float(A4), 'type' : A4type})
 
-            econEngine.annaualWorthAnalysis(tableInput)
+                if A5 and A5type:
+                    tableInput.append({'n' : 5, 'value' : float(A5), 'type' : A5type})
+
+                if A6 and A6type:
+                    tableInput.append({'n' : 6, 'value' : float(A6), 'type' : A6type})
+                
+                if A7 and A7type:
+                    tableInput.append({'n' : 7, 'value' : float(A7), 'type' : A7type})
+
+                if A8 and A8type:
+                    tableInput.append({'n' : 8, 'value' : float(A8), 'type' : A8type})
+
+                if A9 and A9type:
+                    tableInput.append({'n' : 9, 'value' : float(A9), 'type' : A9type})
+
+                if A10 and A10type:
+                    tableInput.append({'n' : 10, 'value' : float(A10), 'type' : A10type})
+
+                print(tableInput)
+                econEngine.presentWorthAnalysis(tableInput, iRate)
+
+            if tableType == "Future Worth Analysis":
+                tableInput = []
+                if A0 and A0type:
+                    tableInput.append({'n' : 0, 'value' : float(A0), 'type' : A0type})
+
+                if A1 and A1type:
+                    tableInput.append({'n': 1, 'value' : float(A1), 'type' : A1type})
+
+                if A2 and A2type:
+                    tableInput.append({'n' : 2, 'value' : float(A2), 'type' : A2type})
+
+                if A3 and A3type:
+                    tableInput.append({'n' : 3, 'value' : float(A3), 'type' : A3type})
+
+                if A4 and A4type:
+                    tableInput.append({'n' : 4, 'value' : float(A4), 'type' : A4type})
+
+                if A5 and A5type:
+                    tableInput.append({'n' : 5, 'value' : float(A5), 'type' : A5type})
+
+                if A6 and A6type:
+                    tableInput.append({'n' : 6, 'value' : float(A6), 'type' : A6type})
+                
+                if A7 and A7type:
+                    tableInput.append({'n' : 7, 'value' : float(A7), 'type' : A7type})
+
+                if A8 and A8type:
+                    tableInput.append({'n' : 8, 'value' : float(A8), 'type' : A8type})
+
+                if A9 and A9type:
+                    tableInput.append({'n' : 9, 'value' : float(A9), 'type' : A9type})
+
+                if A10 and A10type:
+                    tableInput.append({'n' : 10, 'value' : float(A10), 'type' : A10type})
+
+                print(tableInput)
+
+                econEngine.futureWorthAnalysis(tableInput, iRate)
+
+            if tableType == "Annual Worth Analysis":
+                tableInput = []
+                if A0 and A0type:
+                    tableInput.append({'n' : 0, 'value' : float(A0), 'type' : A0type})
+
+                if A1 and A1type:
+                    tableInput.append({'n': 1, 'value' : float(A1), 'type' : A1type})
+
+                if A2 and A2type:
+                    tableInput.append({'n' : 2, 'value' : float(A2), 'type' : A2type})
+
+                if A3 and A3type:
+                    tableInput.append({'n' : 3, 'value' : float(A3), 'type' : A3type})
+
+                if A4 and A4type:
+                    tableInput.append({'n' : 4, 'value' : float(A4), 'type' : A4type})
+
+                if A5 and A5type:
+                    tableInput.append({'n' : 5, 'value' : float(A5), 'type' : A5type})
+
+                if A6 and A6type:
+                    tableInput.append({'n' : 6, 'value' : float(A6), 'type' : A6type})
+                
+                if A7 and A7type:
+                    tableInput.append({'n' : 7, 'value' : float(A7), 'type' : A7type})
+
+                if A8 and A8type:
+                    tableInput.append({'n' : 8, 'value' : float(A8), 'type' : A8type})
+
+                if A9 and A9type:
+                    tableInput.append({'n' : 9, 'value' : float(A9), 'type' : A9type})
+
+                if A10 and A10type:
+                    tableInput.append({'n' : 10, 'value' : float(A10), 'type' : A10type})
+
+                print(tableInput)
+
+                econEngine.annaualWorthAnalysis(tableInput, iRate)
+            else:
+                self.ids.answer_spot.text = "Please check that you made a problem type selection."
+        except:
+                self.ids.answer_spot.text = "Please check that you made a problem type selection, and that your input is valid."
+                exc_type, exc_value, exc_traceback = sys.exc_info()
+                traceback.print_exception(exc_type, exc_value, exc_traceback)
 
 
     pass
