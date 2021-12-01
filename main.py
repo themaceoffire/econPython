@@ -26,7 +26,7 @@ def checkEmpty(input):
     if input:
         if input == "...":
             return False
-        if input == "F" or "P" or "A":
+        if input == "F" or "P":
             return True
         
         try:
@@ -90,7 +90,62 @@ class MainScreen(Screen):
                 answer = f'The answer is: {answer}'
 
                 self.ids.selection_disp.text = answer
-                
+
+            #payment value A from P, A/P
+            if(problemType == "Payment Value, A, from P"):
+                iVal = float(self.ids.mutable1.text)
+                nVal = float(self.ids.mutable2.text)
+                pVal = float(self.ids.mutable3.text)
+
+                answer = econEngine.paymentValueAfromP(iVal, nVal, pVal)
+                answer = str(format(answer, '.2f'))
+                answer = "${:}".format(answer)
+                answer = f'The answer is: {answer}'
+
+                self.ids.selection_disp.text = answer
+
+
+
+            #present value P from A, P/A
+            if(problemType == "Present Value, P, from A"):
+                iVal = float(self.ids.mutable1.text)
+                nVal = float(self.ids.mutable2.text)
+                aVal = float(self.ids.mutable3.text)
+
+                answer = econEngine.presentValuePfromA(iVal, nVal, aVal)
+                answer = str(format(answer, '.2f'))
+                answer = "${:}".format(answer)
+                answer = f'The answer is: {answer}'
+
+                self.ids.selection_disp.text = answer
+
+            #Payment value A from F, A/F
+            if(problemType == "Payment Value, A, from F"):
+                iVal = float(self.ids.mutable1.text)
+                nVal = float(self.ids.mutable2.text)
+                fVal = float(self.ids.mutable3.text)
+            
+                answer = econEngine.paymentValueAfromF(iVal, nVal, fVal)
+                answer = str(format(answer, '.2f'))
+                answer = "${:}".format(answer)
+                answer = f'The answer is: {answer}'
+
+                self.ids.selection_disp.text = answer
+
+            #Future value F from A, F/A
+            if(problemType == "Future Value, F, from A"):
+                iVal = float(self.ids.mutable1.text)
+                nVal = float(self.ids.mutable2.text)
+                aVal = float(self.ids.mutable3.text)
+
+                answer = econEngine.futureValueFfromA(iVal, nVal, aVal)
+                answer = str(format(answer, '.2f'))
+                answer = "${:}".format(answer)
+                answer = f'The answer is: {answer}'
+
+                self.ids.selection_disp.text = answer
+
+
             #number of periods based on i, A, P & F values (N/(A,P,F))
             if(problemType=="Number of Periods"):
                 iVal = float(self.ids.mutable1.text)
@@ -147,10 +202,30 @@ class MainScreen(Screen):
             self.ids.mutable2.hint_text = n
             self.ids.mutable3.hint_text = P
 
+        if(problemType == "Payment Value, A, from P"):
+            self.ids.mutable1.hint_text = i
+            self.ids.mutable2.hint_text = n
+            self.ids.mutable3.hint_text = P
+
+        if(problemType == "Present Value, P, from A"):
+            self.ids.mutable1.hint_text = i
+            self.ids.mutable2.hint_text = n
+            self.ids.mutable3.hint_text = A
+
+        if(problemType == "Payment Value, A, from F"):
+            self.ids.mutable1.hint_text = i
+            self.ids.mutable2.hint_text = n
+            self.ids.mutable3.hint_text = F
+
         if(problemType=="Present Value of a Series"):
             self.ids.mutable1.hint_text = i
             self.ids.mutable2.hint_text = n
             self.ids.mutable3.hint_text = P
+
+        if(problemType=="Future Value, F, from A"):
+            self.ids.mutable1.hint_text = i
+            self.ids.mutable2.hint_text = n
+            self.ids.mutable3.hint_text = A
 
         if(problemType=="Number of Periods"):
             self.ids.mutable1.hint_text = i
@@ -294,6 +369,21 @@ class TableScreen(Screen):
             A10 = False
             A10type = False
 
+        if checkEmpty(self.ids.ae1.text):
+            ae1 = self.ids.ae1.text
+        else:
+            ae1 = False
+
+        if checkEmpty(self.ids.ae2.text):
+            ae2 = self.ids.ae2.text
+        else:
+            ae2 = False
+
+        if checkEmpty(self.ids.ae3.text):
+            ae3 = self.ids.ae3.text
+        else:
+            ae3 = False
+
         iRate = self.ids.iRate.text
 
 
@@ -313,6 +403,7 @@ class TableScreen(Screen):
 
             if tableType == "Present Worth Analysis":
                 tableInput = []
+                annualExpenses = []
                 if A0 and A0type:
                     tableInput.append({'n' : 0, 'value' : float(A0), 'type' : A0type})
 
@@ -346,11 +437,19 @@ class TableScreen(Screen):
                 if A10 and A10type:
                     tableInput.append({'n' : 10, 'value' : float(A10), 'type' : A10type})
 
+                if ae1:
+                    annualExpenses.append(ae1)
+                if ae2:
+                    annualExpenses.append(ae2)
+                if ae3:
+                    annualExpenses.append(ae3)
+
                 print(tableInput)
-                econEngine.presentWorthAnalysis(tableInput, iRate)
+                econEngine.presentWorthAnalysis(tableInput, iRate, annualExpenses)
 
             if tableType == "Future Worth Analysis":
                 tableInput = []
+                annualExpenses = []
                 if A0 and A0type:
                     tableInput.append({'n' : 0, 'value' : float(A0), 'type' : A0type})
 
@@ -386,10 +485,11 @@ class TableScreen(Screen):
 
                 print(tableInput)
 
-                econEngine.futureWorthAnalysis(tableInput, iRate)
+                econEngine.futureWorthAnalysis(tableInput, iRate, annualExpenses)
 
             if tableType == "Annual Worth Analysis":
                 tableInput = []
+                annualExpenses = []
                 if A0 and A0type:
                     tableInput.append({'n' : 0, 'value' : float(A0), 'type' : A0type})
 
@@ -425,7 +525,7 @@ class TableScreen(Screen):
 
                 print(tableInput)
 
-                econEngine.annaualWorthAnalysis(tableInput, iRate)
+                econEngine.annaualWorthAnalysis(tableInput, iRate, annualExpenses)
             
             else:
                 self.ids.answer_spot.text = "Please check that you made a problem type selection."

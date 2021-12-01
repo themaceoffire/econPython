@@ -85,7 +85,7 @@ WindowManager:
             Spinner:
                 id: selection_id
                 text: "Problem Type Selection"
-                values: ["Present Value, P, from F", "Future Value, F, from P", "Number of Periods", "Find Compound Interest"]
+                values: ["Present Value, P, from F", "Future Value, F, from P", "Payment Value, A, from P", "Present Value, P, from A", "Payment Value, A, from F", "Future Value, F, from A" ,"Number of Periods", "Find Compound Interest"]
                 on_text: root.spinner_click(selection_id.text)
                 size_hint_y: 0.1
 
@@ -196,7 +196,7 @@ WindowManager:
             Spinner:
                 id: A0type
                 text: "..."
-                values: ["F", "P", "A"]
+                values: ["F", "P"]
 
 
             Label:
@@ -206,7 +206,7 @@ WindowManager:
             Spinner:
                 id: A1type
                 text: "..."
-                values: ["F", "P", "A"]
+                values: ["F", "P"]
 
 
             Label:
@@ -216,7 +216,7 @@ WindowManager:
             Spinner:
                 id: A2type
                 text: "..."
-                values: ["F", "P", "A"]
+                values: ["F", "P"]
 
             Label:
                 text: "3"
@@ -225,7 +225,7 @@ WindowManager:
             Spinner:
                 id: A3type
                 text: "..."
-                values: ["F", "P", "A"]
+                values: ["F", "P"]
 
             Label:
                 text: "4"
@@ -234,7 +234,7 @@ WindowManager:
             Spinner:
                 id: A4type
                 text: "..."
-                values: ["F", "P", "A"]
+                values: ["F", "P"]
 
             Label:
                 text: "5"
@@ -243,7 +243,7 @@ WindowManager:
             Spinner:
                 id: A5type
                 text: "..."
-                values: ["F", "P", "A"]
+                values: ["F", "P"]
 
             Label:
                 text: "6"
@@ -252,7 +252,7 @@ WindowManager:
             Spinner:
                 id: A6type
                 text: "..."
-                values: ["F", "P", "A"]
+                values: ["F", "P"]
 
             Label:
                 text: "7"
@@ -261,7 +261,7 @@ WindowManager:
             Spinner:
                 id: A7type
                 text: "..."
-                values: ["F", "P", "A"]
+                values: ["F", "P"]
 
             Label:
                 text: "8"
@@ -270,7 +270,7 @@ WindowManager:
             Spinner:
                 id: A8type
                 text: "..."
-                values: ["F", "P", "A"]
+                values: ["F", "P"]
 
             Label:
                 text: "9"
@@ -279,7 +279,7 @@ WindowManager:
             Spinner:
                 id: A9type
                 text: "..."
-                values: ["F", "P", "A"]
+                values: ["F", "P"]
 
             Label:
                 text: "10"
@@ -288,7 +288,31 @@ WindowManager:
             Spinner:
                 id: A10type
                 text: "..."
-                values: ["F", "P", "A"]
+                values: ["F", "P"]
+
+            Label:
+                text: "Annual Expense 1"
+            TextInput:
+                id: ae1
+            Label:
+                text: ""
+            
+            
+            Label:
+                text: "Annual Expense 2"
+            TextInput:
+                id: ae2
+            Label:
+                text: ""
+
+
+            Label:
+                text: "Annual Expense 3"
+            TextInput:
+                id: ae3
+            Label:
+                text: ""
+
 
             Label:
                 text: ""
