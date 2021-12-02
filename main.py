@@ -196,36 +196,43 @@ class MainScreen(Screen):
             self.ids.mutable1.hint_text = i
             self.ids.mutable2.hint_text = n
             self.ids.mutable3.hint_text = F
+            self.ids.mutable4.size_hint_y = 0
 
         if(problemType=="Future Value, F, from P"):
             self.ids.mutable1.hint_text = i
             self.ids.mutable2.hint_text = n
             self.ids.mutable3.hint_text = P
+            self.ids.mutable4.size_hint_y = 0
 
         if(problemType == "Payment Value, A, from P"):
             self.ids.mutable1.hint_text = i
             self.ids.mutable2.hint_text = n
             self.ids.mutable3.hint_text = P
+            self.ids.mutable4.size_hint_y = 0
 
         if(problemType == "Present Value, P, from A"):
             self.ids.mutable1.hint_text = i
             self.ids.mutable2.hint_text = n
             self.ids.mutable3.hint_text = A
+            self.ids.mutable4.size_hint_y = 0
 
         if(problemType == "Payment Value, A, from F"):
             self.ids.mutable1.hint_text = i
             self.ids.mutable2.hint_text = n
             self.ids.mutable3.hint_text = F
+            self.ids.mutable4.size_hint_y = 0
 
         if(problemType=="Present Value of a Series"):
             self.ids.mutable1.hint_text = i
             self.ids.mutable2.hint_text = n
             self.ids.mutable3.hint_text = P
+            self.ids.mutable4.size_hint_y = 0
 
         if(problemType=="Future Value, F, from A"):
             self.ids.mutable1.hint_text = i
             self.ids.mutable2.hint_text = n
             self.ids.mutable3.hint_text = A
+            self.ids.mutable4.size_hint_y = 0
 
         if(problemType=="Number of Periods"):
             self.ids.mutable1.hint_text = i
@@ -233,12 +240,13 @@ class MainScreen(Screen):
             self.ids.mutable3.hint_text = P
             self.ids.mutable4.hint_text = F
 
-            self.ids.mutable4.size_hint_y = 0.1
+            self.ids.mutable4.size_hint_y = 0.3
 
         if(problemType=="Find Compound Interest"):
             self.ids.mutable1.hint_text = n
             self.ids.mutable2.hint_text = A
             self.ids.mutable3.hint_text = P
+            self.ids.mutable4.size_hint_y = 0
 
 
         #reseting contextual values
