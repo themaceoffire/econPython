@@ -155,8 +155,7 @@ class MainScreen(Screen):
 
                 answer = econEngine.numPeriods(iVal, aVal, pVal, fVal)
                 answer = str(format(answer, '.2f'))
-                answer = "${:}".format(answer)
-                answer = f'The answer is: {answer}'
+                answer = f'The answer is: {answer} years'
 
                 self.ids.selection_disp.text = answer
 
